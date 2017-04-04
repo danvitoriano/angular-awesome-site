@@ -1,0 +1,30 @@
+<div class="jumbotron">
+    <h1 class="text-center">Photos</h1>
+</div>
+
+<p ng-show="message.length" class="alert alert-info">
+    {{message}}
+</p>
+
+<div class="row">
+    <div class="col-md-12">
+    <form>
+        <div class="input-group">
+            <span class="input-group-btn">
+                <a href="/photos/new" class="btn btn-primary" type="button">
+                    New photo
+                </a>
+            </span>
+            <input class="form-control" placeholder="filtrar pelo título da photo" ng-model="filter" ng-model-options="{ debounce: 500 }">
+            <p>{{filter}}</p>
+        </div>
+    </form>
+    </div> <!-- fim col-md-12 -->
+</div> <!-- fim row -->
+<div class="row">
+    <custom-panel class="col-md-2 animated-panel" ng-repeat="photo in photos | filter: {titulo: filter}" titulo="{{photo.titulo}}">
+        <my-photo url="{{photo.url}}" titulo="{{photo.titulo}}"></my-photo>
+        <a class="btn btn-primary btn-block" href="/photos/edit/{{photo._id}}">Edit</a>
+        <my-danger-button name="Remove" action="remove(photo)"></my-danger-button>
+    </custom-panel>
+</div>

@@ -1,0 +1,52 @@
+<div class="page-header text-center">
+    <h1>{{photo.titulo}}</h1>
+</div>
+
+<p ng-show="message.length" class="alert alert-info">{{message}}</p>
+
+<form novalidate name="formPhoto" class="row" ng-submit="submit()">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Título</label>
+            <input name="titulo" class="form-control" 
+            	ng-model="photo.titulo" required
+            	ng-maxlength="20">    
+            <span class="form-control alert-danger" ng-show="formPhoto.$submitted && formPhoto.titulo.$error.required">Titulo obrigatório</span>
+            <span class="form-control alert-danger" ng-show="formPhoto.$submitted && formPhoto.titulo.$error.maxlength">No máximo 20 caracteres</span>
+        </div>
+        <div class="form-group">
+            <label>URL</label>
+            <input name="url" class="form-control" ng-model="photo.url" required>
+            <span class="form-control alert-danger" ng-show="formPhoto.$submitted && formPhoto.url.$error.required">URL obrigatória</span>
+        </div>
+        <div class="form-group">
+            <label>Descrição</label>
+            <textarea name="descricao" class="form-control" ng-model="photo.descricao">
+            </textarea>
+        </div>
+        <div class="form-group">
+        	<label>group</label>
+        	<select name="group"
+        		ng-model="photo.group"
+        		ng-controller="GroupsController" 
+        		ng-options="group._id as (group.nome | uppercase) for group in groups"
+        		class="form-control" required>
+        		<option value="">Escolha um group</option>
+        	</select>
+        	<span ng-show="formPhoto.$submitted && formPhoto.group.$error.required" class="form-control alert-danger">
+        		group obrigatório
+        	</span>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" ng-disabled="formPhoto.$invalid">
+            Salvar
+        </button>
+         <a href="/" my-focus focused="focused" class="btn btn-primary">Voltar</a>
+        <hr>
+    </div>
+    <div class="col-md-6">
+        <my-photo url="{{photo.url}}" titulo="{{photo.titulo}}">
+        </my-photo>
+    </div>
+</form>

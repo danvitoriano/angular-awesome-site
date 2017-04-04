@@ -1,5 +1,5 @@
-angular.module('minhasDiretivas', [])
-	.directive('meuPainel', function(){
+angular.module('customDirectives', [])
+	.directive('customPanel', function(){
 		var ddo = {};
 		
 		ddo.restrict = "AE";
@@ -10,11 +10,11 @@ angular.module('minhasDiretivas', [])
 			titulo: '@' //use same prop-name value as a string
 		};
 
-		ddo.templateUrl = 'js/directives/meu-painel.html';
+		ddo.templateUrl = 'js/directives/custom-panel.html';
 
 		return ddo;
 	})
-	.directive('minhaFoto', function(){
+	.directive('myPhoto', function(){
 		var ddo = {};
 		ddo.restrict = "AE";
 		ddo.scope = {
@@ -26,28 +26,28 @@ angular.module('minhasDiretivas', [])
 		return ddo;
 
 	})
-	.directive('meuBotaoPerigo', function(){
+	.directive('myDangerButton', function(){
 		var ddo = {};
 		ddo.restrict = "E";
 		ddo.scope = {
-			nome : '@',
-			acao : '&'
+			name : '@',
+			action : '&'
 		};
-		ddo.template = '<button class="btn btn-danger btn-block" ng-click="acao()">{{nome}}</button>';
+		ddo.template = '<button class="btn btn-danger btn-block" ng-click="action()">{{name}}</button>';
 		return ddo;
 	})
-	.directive('meuFocus', function(){
+	.directive('myFocus', function(){
 		var ddo = {};
 		ddo.restrict = "A";
 		ddo.scope = {
-			focado: '='
+			focused: '='
 		};
 		ddo.link = function(scope, element){
 			//escopo da diretiva
-			scope.$watch('focado', function(){
-				if(scope.focado){
+			scope.$watch('focused', function(){
+				if(scope.focused){
 					element[0].focus();
-					scope.focado = false;
+					scope.focused = false;
 				}
 			});
 		};
